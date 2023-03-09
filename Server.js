@@ -1,7 +1,15 @@
-const http = require("http");
-const route = require("./route")
-const { DEFAULT_ENCODING } = require("crypto");
+const express = require('express')
 
-const server = http.createServer(route);
+const app = express()
 
-server.listen(3000);
+app.use((req,res,next) =>{
+    console.log("In the middleware")
+    next()
+})
+
+app.use((req,res,next) =>{
+    console.log("In second  middleware")
+    res.send('{ key1: value }')
+})
+
+app.listen(3000);
